@@ -23,24 +23,39 @@ Future<List<UploadedFile>> processFiles(List<LrfDto> lrfDtoList) async {
   List<UploadedFile> uploadedFiles = [];
 
   for (var lrfDto in lrfDtoList) {
-    // Read the content of the file as a JSON string
+    var griddata = lrfDto.data?.griddata;
 
-    // Parse the JSON content into a FileContent model
+    if (griddata != null) {
+      var siteIds = griddata.siteId ?? [];
+      var fingerprints = griddata.fingerprint ?? [];
+      var serialNumbers = griddata.serialNumber ?? [];
 
+      // Determine the minimum length among the lists to prevent out-of-bounds errors
+      int minLength = [
+        siteIds.length,
+        fingerprints.length,
+        serialNumbers.length
+      ].reduce((a, b) => a < b ? a : b);
 
-    // Create the UploadedFile object using the parsed content
-    uploadedFiles.add(
-      UploadedFile(
-        fileName: lrfDto.name??"",
-        siteCode: TextEditingController(text: '${lrfDto.data?.siteId}'),
-        sequenceNumber: TextEditingController(text: '${lrfDto.data?.serialNumber}'),
-        fingerPrint: TextEditingController(text: '${lrfDto.data?.fingerprint}'),
-      ),
-    );
+      for (int i = 0; i < minLength; i++) {
+        // Convert serialNumber to string if it's not already
+        String serialNumberStr = serialNumbers[i].toString();
+
+        uploadedFiles.add(
+          UploadedFile(
+            fileName: lrfDto.name ?? "",
+            siteCode: TextEditingController(text: siteIds[i]),
+            sequenceNumber: TextEditingController(text: serialNumberStr),
+            fingerPrint: TextEditingController(text: fingerprints[i]),
+          ),
+        );
+      }
+    }
   }
 
   return uploadedFiles;
 }
+
 Future<List<LrfDto>> convertPlatformFileToFile(List<PlatformFile> files) async {
   // Use Future.wait() to await all asynchronous operations in the map
   List<LrfDto> result = await Future.wait(
@@ -49,8 +64,11 @@ Future<List<LrfDto>> convertPlatformFileToFile(List<PlatformFile> files) async {
       File fileInstance = File(filePath);
       String content = await fileInstance.readAsString();
       // Parse the JSON content into a FileContent model
+      print(content);
       Map<String, dynamic> jsonData = jsonDecode(content);
+      print("jsonData$jsonData");
       LrfDto fileContentModel = LrfDto.fromJson(file.name,jsonData);
+      print("fileContentModel$fileContentModel");
       return fileContentModel;  // Return the content of each file
     }).toList(),
   );

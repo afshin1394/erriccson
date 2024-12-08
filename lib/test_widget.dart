@@ -35,7 +35,7 @@ class WindowsApp extends HookConsumerWidget {
         List<UploadedFile> uploadFiles = await processFiles(lrfDtoList);
 
 
-        uploadedFiles.value = uploadFiles.map((lrf) {
+          uploadedFiles.value = uploadFiles.map((lrf) {
 
           generateFullLicenseXml(lrf.fileName, lrf.sequenceNumber.text, lrf.fingerPrint.text);
           return UploadedFile(
