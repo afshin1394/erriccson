@@ -3,10 +3,10 @@ import 'package:erricson_dongle_tool/consts.dart';
 import 'package:erricson_dongle_tool/utils.dart';
 import 'package:process_run/process_run.dart';
 import 'package:xml/xml.dart';
+import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
-
-String generateLicenseBodyXml(String sequenceNumber ,String fingerPrint) {
+String generateLicenseBodyXml(String sequenceNumber, String fingerPrint) {
   // Create the XML structure
   final builder = XmlBuilder();
 
@@ -46,43 +46,37 @@ String generateLicenseBodyXml(String sequenceNumber ,String fingerPrint) {
   return builder.buildDocument().toXmlString(pretty: true, indent: '  ');
 }
 
-Future<String> createDirectory() async{
-  final directory = await getApplicationDocumentsDirectory();
-
-  // Create a new directory path inside the documents directory
-  final newDirectoryPath = '${directory.path}/LKF';
-
+Future<String> createDirectory(String newDirectoryPath) async {
   // Create the directory
   final newDirectory = Directory(newDirectoryPath);
   if (await newDirectory.exists()) {
     print('Directory already exists at: $newDirectoryPath');
   } else {
     // Create the directory if it does not exist
-    await newDirectory.create();
+    await newDirectory.create(recursive: true);
     print('Directory created at: $newDirectoryPath');
   }
   return newDirectoryPath;
-
 }
 
-Future<String> generateFullLicenseXml(String fileName,String sequenceNumber ,String fingerPrint) async {
-  // Generate the XML body
-  String bodyXml = generateLicenseBodyXml(sequenceNumber,fingerPrint);
-  final directory = await getApplicationDocumentsDirectory();
+Future<String> generateFullLicenseXml(
+    {required String basePath,
+      required String fileName,
+      required String sequenceNumber,
+      required String fingerPrint}) async {
+  String bodyXml = generateLicenseBodyXml(sequenceNumber, fingerPrint);
 
-  // Specify the file path
-  final LKFDirPath = await createDirectory();
-  final filePath = "$LKFDirPath/$fileName";
-  File file = File("$filePath");
-  file.writeAsString(bodyXml);
-  // RSAPrivateKey privateKey = _parsePrivateKey();
+  final directoryPath = p.join(basePath, fileName);  // Use path_provider for proper path construction
+  await createDirectory(directoryPath);  // Make sure directory is created
 
-  // Sign the XML body with the private key
-  // String signedXml = await signXmlAsBase64(bodyXml, privateKey);
-  String signedXML = await signXmlFile("assets/files/receiver_private_key.pem",file.path);
-  print(signedXML);
-  file.deleteSync(recursive: true);
+  final filePath = p.join(directoryPath, '$fileName.txt'); // Combine path components correctly
+  File file = File(filePath);
+  await file.writeAsString(bodyXml);  // Await to ensure the file is written before proceeding
 
+  String signedXML =
+  await signXmlFile("assets/files/receiver_private_key.pem", file.path);
+
+  file.deleteSync(recursive: true);  // Deleting the file after signing
 
   // Parse the body XML to get its root elements
   final bodyElement = XmlDocument.parse(bodyXml).rootElement;
@@ -122,36 +116,36 @@ Future<String> generateFullLicenseXml(String fileName,String sequenceNumber ,Str
     });
 
     builder.element('certificatechain', nest: () {
-      builder.element('prodcert',
-          nest:
-              prodcert);
-      builder.element('cacert',
-          nest:
-              cacert);
+      builder.element('prodcert', nest: prodcert);
+      builder.element('cacert', nest: cacert);
     });
   });
-  // print(builder.buildDocument().toXmlString(pretty: true, indent: '  '));
-  final fileLKFPath = "$LKFDirPath/${fingerPrint}_${getCurrentDateTimeLKF()}.txt";
-  File fileLKF = File("$fileLKFPath");
-  fileLKF.writeAsString(builder.buildDocument().toXmlString(pretty: true, indent: '  '));
-  print(fileLKF.path);
+
+  final fileLKFPath = p.join(directoryPath, '$fileName.txt');
+  File fileLKF = File(fileLKFPath);
+  await fileLKF.writeAsString(
+      builder.buildDocument().toXmlString(pretty: true, indent: '  '));
   // Return the generated full XML string
   return builder.buildDocument().toXmlString(pretty: true, indent: '  ');
 }
 
-
-
-
-
 Future<String> signXmlFile(String privateKeyPath, String xmlFilePath) async {
   try {
     // Path to save the signature file
-    String signatureFilePath = '${xmlFilePath}';
+    String signatureFilePath = xmlFilePath;
 
     // Run OpenSSL command to sign the XML file
     var result = await runExecutableArguments(
       'openssl',
-      ['dgst', '-sha256', '-sign', privateKeyPath, '-out', signatureFilePath, xmlFilePath],
+      [
+        'dgst',
+        '-sha256',
+        '-sign',
+        privateKeyPath,
+        '-out',
+        signatureFilePath,
+        xmlFilePath
+      ],
     );
 
     if (result.exitCode == 0) {
@@ -162,7 +156,7 @@ Future<String> signXmlFile(String privateKeyPath, String xmlFilePath) async {
 
       // Return the signature as a base64 encoded string or raw bytes
       return signature.isNotEmpty
-          ?"${signature.fold("", (prev, element) => prev + element.toRadixString(16).padLeft(2, '0'))}"
+          ? "${signature.fold("", (prev, element) => prev + element.toRadixString(16).padLeft(2, '0'))}"
           : 'Failed to generate signature';
     } else {
       print('Error signing XML: ${result.stderr}');

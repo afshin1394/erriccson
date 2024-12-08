@@ -1,21 +1,32 @@
-/// data : {"comment":"","site_id":"","griddata":{"site_id":["T001","T002","T003","T004","T005","T006","T007","T008","T009","T010","T011","T012","T013","T014","T015","T016","T017","T018","T019","T020","T021","T022","T023","T024","T025","T026","T027","T028","T029","T030","T031","T032","T033","T034","T035","T036","T037","T038","T039","T040","T041","T042","T043","T044","T045","T046","T047","T048","T049","T050","T051","T052","T053","T054","T055","T056","T057","T058","T059","T060","T061","T062","T063","T064","T065","T066","T067","T068","T069","T070","T071","T072","T073","T074","T075","T076","T077","T078","T079","T080","T081","T082","T083","T084","T085","T086","T087","T088","T089","T090","T091","T092","T093","T094","T095","T096","T097","T098","T099","T100","T101","T102","T103","T104","T105","T106","T107","T108","T109","T110","T111","T112","T113","T114","T115","T116","T117","T118","T119","T120","T121","T122","T123","T124","T125","T126","T127","T128","T129","T130","T131","T132","T133","T134","T135","T136","T137","T138","T139","T140","T141","T142","T143","T144","T145","T146","T147","T148","T149","T150","T151","T152","T153","T154","T155","T156","T157","T158","T159","T160","T161","T162","T163","T164","T165","T166","T167","T168","T169","T170","T171","T172","T173","T174","T175","T176","T177","T178","T179","T180","T181","T182","T183","T184","T185","T186","T187","T188","T189","T190","T191","T192","T193","T194","T195","T196","T197","T198","T199","T200","T201","T202","T203","T204","T205","T206","T207","T208","T209","T210","T211","T212","T213","T214","T215","T216","T217","T218","T219","T220","T221","T222","T223","T224","T225","T226","T227","T228","T229","T230","T231","T232","T233","T234","T235","T236","T237","T238","T239","T240","T241","T242","T243","T244","T245","T246","T247","T248","T249","T250","T251","T252","T253","T254","T255","T256","T257","T258","T259","T260","T261","T262","T263","T264","T265","T266","T267","T268","T269","T270"],"fingerprint":["absjjsjs","absjjsjs88888888888","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs"],"serial_number":["1057888888888888",1058,1059,1060,1061,1062,1063,1064,1065,1066,1067,1068,1069,1070,1071,1072,1073,1074,1075,1076,1077,1078,1079,1080,1081,1082,1083,1084,1085,1086,1087,1088,1089,1090,1091,1092,1093,1094,1095,1096,1097,1098,1099,1100,1101,1102,1103,1104,1105,1106,1107,1108,1109,1110,1111,1112,1113,1114,1115,1116,1117,1118,1119,1120,1121,1122,1123,1124,1125,1126,1127,1128,1129,1130,1131,1132,1133,1134,1135,1136,1137,1138,1139,1140,1141,1142,1143,1144,1145,1146,1147,1148,1149,1150,1151,1152,1153,1154,1155,1156,1157,1158,1159,1160,1161,1162,1163,1164,1165,1166,1167,1168,1169,1170,1171,1172,1173,1174,1175,1176,1177,1178,1179,1180,1181,1182,1183,1184,1185,1186,1187,1188,1189,1190,1191,1192,1193,1194,1195,1196,1197,1198,1199,1200,1201,1202,1203,1204,1205,1206,1207,1208,1209,1210,1211,1212,1213,1214,1215,1216,1217,1218,1219,1220,1221,1222,1223,1224,1225,1226,1227,1228,1229,1230,1231,1232,1233,1234,1235,1236,1237,1238,1239,1240,1241,1242,1243,1244,1245,1246,1247,1248,1249,1250,1251,1252,1253,1254,1255,1256,1257,1258,1259,1260,1261,1262,1263,1264,1265,1266,1267,1268,1269,1270,1271,1272,1273,1274,1275,1276,1277,1278,1279,1280,1281,1282,1283,1284,1285,1286,1287,1288,1289,1290,1291,1292,1293,1294,1295,1296,1297,1298,1299,1300,1301,1302,1303,1304,1305,1306,1307,1308,1309,1310,1311,1312,1313,1314,1315,1316,1317,1318,1319,1320,1321,1322,1323,1324,1325,1326],"__cols__order__":["site_id","fingerprint","serial_number"]},"fingerprint":"","serial_number":""}
-/// signature : "c2ec7bd79026ae7e97ba3cc16acb1353aa2f1f55e0d10cf3848f7135a280362963ed0202e4954dabfd3fafc54dc51162b06ebe224e32b8211cad60983016ceff71f2d022e4a1cdd32f3ed2d7873ae4836858cd0fc0ca39377d74fcc9b9c5f7cc3c3f66ebe62f05313cb230396a21d3c10981d2e73343b63c0188fead20ffb927f10c5548f7d6b4afcb3aabfdb2b677b7b87389ef3eecb1b9cc8c89e6239b228b018bbac51bb893d576d408290fba43aa64049e583755dd56efd1806c407ce2fc515c60f2dde49adf8667189eb9007bcc63686cbcdf256b0678097fa1fb318123d9180f14545da8c19dcfd4b85224c63a07743f3ef560c5d1d6f9458679a015ab"
+/// DTO class representing the entire data structure.
 
 class LrfDto {
   LrfDto({
-      this.name,
-      this.data, 
-      this.signature,});
+    this.name,
+    this.data,
+    this.signature,
+  });
 
-  LrfDto.fromJson(String fileName,dynamic json) {
+  /// Creates an instance of [LrfDto] from JSON.
+  ///
+  /// - [fileName]: The name of the file being parsed.
+  /// - [json]: The JSON data to parse.
+  LrfDto.fromJson(String fileName, dynamic json) {
     name = fileName;
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
     signature = json['signature'];
   }
+
+  /// The name associated with this DTO, typically the file name.
   String? name;
+
+  /// The [Data] object containing the core data.
   Data? data;
+
+  /// The signature for data integrity verification.
   String? signature;
 
+  /// Converts the [LrfDto] instance to JSON.
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     if (data != null) {
@@ -25,76 +36,107 @@ class LrfDto {
     return map;
   }
 
+  @override
+  String toString() {
+    return 'LrfDto{name: $name, data: $data, signature: $signature}';
+  }
 }
 
-/// comment : ""
-/// site_id : ""
-/// griddata : {"site_id":["T001","T002","T003","T004","T005","T006","T007","T008","T009","T010","T011","T012","T013","T014","T015","T016","T017","T018","T019","T020","T021","T022","T023","T024","T025","T026","T027","T028","T029","T030","T031","T032","T033","T034","T035","T036","T037","T038","T039","T040","T041","T042","T043","T044","T045","T046","T047","T048","T049","T050","T051","T052","T053","T054","T055","T056","T057","T058","T059","T060","T061","T062","T063","T064","T065","T066","T067","T068","T069","T070","T071","T072","T073","T074","T075","T076","T077","T078","T079","T080","T081","T082","T083","T084","T085","T086","T087","T088","T089","T090","T091","T092","T093","T094","T095","T096","T097","T098","T099","T100","T101","T102","T103","T104","T105","T106","T107","T108","T109","T110","T111","T112","T113","T114","T115","T116","T117","T118","T119","T120","T121","T122","T123","T124","T125","T126","T127","T128","T129","T130","T131","T132","T133","T134","T135","T136","T137","T138","T139","T140","T141","T142","T143","T144","T145","T146","T147","T148","T149","T150","T151","T152","T153","T154","T155","T156","T157","T158","T159","T160","T161","T162","T163","T164","T165","T166","T167","T168","T169","T170","T171","T172","T173","T174","T175","T176","T177","T178","T179","T180","T181","T182","T183","T184","T185","T186","T187","T188","T189","T190","T191","T192","T193","T194","T195","T196","T197","T198","T199","T200","T201","T202","T203","T204","T205","T206","T207","T208","T209","T210","T211","T212","T213","T214","T215","T216","T217","T218","T219","T220","T221","T222","T223","T224","T225","T226","T227","T228","T229","T230","T231","T232","T233","T234","T235","T236","T237","T238","T239","T240","T241","T242","T243","T244","T245","T246","T247","T248","T249","T250","T251","T252","T253","T254","T255","T256","T257","T258","T259","T260","T261","T262","T263","T264","T265","T266","T267","T268","T269","T270"],"fingerprint":["absjjsjs","absjjsjs88888888888","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs"],"serial_number":["1057888888888888",1058,1059,1060,1061,1062,1063,1064,1065,1066,1067,1068,1069,1070,1071,1072,1073,1074,1075,1076,1077,1078,1079,1080,1081,1082,1083,1084,1085,1086,1087,1088,1089,1090,1091,1092,1093,1094,1095,1096,1097,1098,1099,1100,1101,1102,1103,1104,1105,1106,1107,1108,1109,1110,1111,1112,1113,1114,1115,1116,1117,1118,1119,1120,1121,1122,1123,1124,1125,1126,1127,1128,1129,1130,1131,1132,1133,1134,1135,1136,1137,1138,1139,1140,1141,1142,1143,1144,1145,1146,1147,1148,1149,1150,1151,1152,1153,1154,1155,1156,1157,1158,1159,1160,1161,1162,1163,1164,1165,1166,1167,1168,1169,1170,1171,1172,1173,1174,1175,1176,1177,1178,1179,1180,1181,1182,1183,1184,1185,1186,1187,1188,1189,1190,1191,1192,1193,1194,1195,1196,1197,1198,1199,1200,1201,1202,1203,1204,1205,1206,1207,1208,1209,1210,1211,1212,1213,1214,1215,1216,1217,1218,1219,1220,1221,1222,1223,1224,1225,1226,1227,1228,1229,1230,1231,1232,1233,1234,1235,1236,1237,1238,1239,1240,1241,1242,1243,1244,1245,1246,1247,1248,1249,1250,1251,1252,1253,1254,1255,1256,1257,1258,1259,1260,1261,1262,1263,1264,1265,1266,1267,1268,1269,1270,1271,1272,1273,1274,1275,1276,1277,1278,1279,1280,1281,1282,1283,1284,1285,1286,1287,1288,1289,1290,1291,1292,1293,1294,1295,1296,1297,1298,1299,1300,1301,1302,1303,1304,1305,1306,1307,1308,1309,1310,1311,1312,1313,1314,1315,1316,1317,1318,1319,1320,1321,1322,1323,1324,1325,1326],"__cols__order__":["site_id","fingerprint","serial_number"]}
-/// fingerprint : ""
-/// serial_number : ""
+/// Class representing the 'data' field in JSON.
 
 class Data {
   Data({
-      this.comment, 
-      this.siteId, 
-      this.griddata, 
-      this.fingerprint, 
-      this.serialNumber,});
+    this.griddata,
+  });
 
+  /// Creates an instance of [Data] from JSON.
+  ///
+  /// - [json]: The JSON data to parse.
   Data.fromJson(dynamic json) {
-    comment = json['comment'];
-    siteId = json['site_id'];
-    griddata = json['griddata'] != null ? Griddata.fromJson(json['griddata']) : null;
-    fingerprint = json['fingerprint'];
-    serialNumber = json['serial_number'];
+    try {
+      griddata = json['griddata'] != null ? Griddata.fromJson(json['griddata']) : null;
+    } catch (e) {
+      print('Error parsing Griddata: $e');
+      griddata = null;
+      // Handle the error as needed.
+    }
   }
-  String? comment;
-  String? siteId;
-  Griddata? griddata;
-  String? fingerprint;
-  String? serialNumber;
 
+  /// The [Griddata] object containing detailed grid information.
+  Griddata? griddata;
+
+  /// Converts the [Data] instance to JSON.
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['comment'] = comment;
-    map['site_id'] = siteId;
     if (griddata != null) {
       map['griddata'] = griddata?.toJson();
     }
-    map['fingerprint'] = fingerprint;
-    map['serial_number'] = serialNumber;
     return map;
   }
 
   @override
   String toString() {
-    return 'Data{comment: $comment, siteId: $siteId, griddata: $griddata, fingerprint: $fingerprint, serialNumber: $serialNumber}';
+    return 'Data{griddata: $griddata}';
   }
 }
 
-/// site_id : ["T001","T002","T003","T004","T005","T006","T007","T008","T009","T010","T011","T012","T013","T014","T015","T016","T017","T018","T019","T020","T021","T022","T023","T024","T025","T026","T027","T028","T029","T030","T031","T032","T033","T034","T035","T036","T037","T038","T039","T040","T041","T042","T043","T044","T045","T046","T047","T048","T049","T050","T051","T052","T053","T054","T055","T056","T057","T058","T059","T060","T061","T062","T063","T064","T065","T066","T067","T068","T069","T070","T071","T072","T073","T074","T075","T076","T077","T078","T079","T080","T081","T082","T083","T084","T085","T086","T087","T088","T089","T090","T091","T092","T093","T094","T095","T096","T097","T098","T099","T100","T101","T102","T103","T104","T105","T106","T107","T108","T109","T110","T111","T112","T113","T114","T115","T116","T117","T118","T119","T120","T121","T122","T123","T124","T125","T126","T127","T128","T129","T130","T131","T132","T133","T134","T135","T136","T137","T138","T139","T140","T141","T142","T143","T144","T145","T146","T147","T148","T149","T150","T151","T152","T153","T154","T155","T156","T157","T158","T159","T160","T161","T162","T163","T164","T165","T166","T167","T168","T169","T170","T171","T172","T173","T174","T175","T176","T177","T178","T179","T180","T181","T182","T183","T184","T185","T186","T187","T188","T189","T190","T191","T192","T193","T194","T195","T196","T197","T198","T199","T200","T201","T202","T203","T204","T205","T206","T207","T208","T209","T210","T211","T212","T213","T214","T215","T216","T217","T218","T219","T220","T221","T222","T223","T224","T225","T226","T227","T228","T229","T230","T231","T232","T233","T234","T235","T236","T237","T238","T239","T240","T241","T242","T243","T244","T245","T246","T247","T248","T249","T250","T251","T252","T253","T254","T255","T256","T257","T258","T259","T260","T261","T262","T263","T264","T265","T266","T267","T268","T269","T270"]
-/// fingerprint : ["absjjsjs","absjjsjs88888888888","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs","absjjsjs"]
-/// serial_number : ["1057888888888888",1058,1059,1060,1061,1062,1063,1064,1065,1066,1067,1068,1069,1070,1071,1072,1073,1074,1075,1076,1077,1078,1079,1080,1081,1082,1083,1084,1085,1086,1087,1088,1089,1090,1091,1092,1093,1094,1095,1096,1097,1098,1099,1100,1101,1102,1103,1104,1105,1106,1107,1108,1109,1110,1111,1112,1113,1114,1115,1116,1117,1118,1119,1120,1121,1122,1123,1124,1125,1126,1127,1128,1129,1130,1131,1132,1133,1134,1135,1136,1137,1138,1139,1140,1141,1142,1143,1144,1145,1146,1147,1148,1149,1150,1151,1152,1153,1154,1155,1156,1157,1158,1159,1160,1161,1162,1163,1164,1165,1166,1167,1168,1169,1170,1171,1172,1173,1174,1175,1176,1177,1178,1179,1180,1181,1182,1183,1184,1185,1186,1187,1188,1189,1190,1191,1192,1193,1194,1195,1196,1197,1198,1199,1200,1201,1202,1203,1204,1205,1206,1207,1208,1209,1210,1211,1212,1213,1214,1215,1216,1217,1218,1219,1220,1221,1222,1223,1224,1225,1226,1227,1228,1229,1230,1231,1232,1233,1234,1235,1236,1237,1238,1239,1240,1241,1242,1243,1244,1245,1246,1247,1248,1249,1250,1251,1252,1253,1254,1255,1256,1257,1258,1259,1260,1261,1262,1263,1264,1265,1266,1267,1268,1269,1270,1271,1272,1273,1274,1275,1276,1277,1278,1279,1280,1281,1282,1283,1284,1285,1286,1287,1288,1289,1290,1291,1292,1293,1294,1295,1296,1297,1298,1299,1300,1301,1302,1303,1304,1305,1306,1307,1308,1309,1310,1311,1312,1313,1314,1315,1316,1317,1318,1319,1320,1321,1322,1323,1324,1325,1326]
-/// __cols__order__ : ["site_id","fingerprint","serial_number"]
+/// Class representing the 'griddata' field in JSON.
 
 class Griddata {
   Griddata({
-      this.siteId, 
-      this.fingerprint, 
-      this.serialNumber, 
-      this.colsOrder,});
+    this.siteId,
+    this.fingerprint,
+    this.serialNumber,
+    this.colsOrder,
+  });
 
+  /// Creates an instance of [Griddata] from JSON.
+  ///
+  /// - [json]: The JSON data to parse.
   Griddata.fromJson(dynamic json) {
-    siteId = json['site_id'] != null ? json['site_id'].cast<String>() : [];
-    fingerprint = json['fingerprint'] != null ? json['fingerprint'].cast<String>() : [];
-    serialNumber = json['serial_number'] != null ? json['serial_number'].cast<String>() : [];
-    colsOrder = json['__cols__order__'] != null ? json['__cols__order__'].cast<String>() : [];
+    try {
+      // Parse 'site_id' as a list of strings.
+      siteId = json['site_id'] != null
+          ? List<String>.from(json['site_id'].map((item) => item.toString()))
+          : [];
+
+      // Parse 'fingerprint' as a list of strings.
+      fingerprint = json['fingerprint'] != null
+          ? List<String>.from(json['fingerprint'].map((item) => item.toString()))
+          : [];
+
+      // Parse 'serial_number' as a list of strings to handle mixed types.
+      serialNumber = json['serial_number'] != null
+          ? List<String>.from(json['serial_number'].map((item) => item.toString()))
+          : [];
+
+      // Parse '__cols__order__' as a list of strings.
+      colsOrder = json['__cols__order__'] != null
+          ? List<String>.from(json['__cols__order__'].map((item) => item.toString()))
+          : [];
+    } catch (e) {
+      print('Error parsing Griddata fields: $e');
+      siteId = [];
+      fingerprint = [];
+      serialNumber = [];
+      colsOrder = [];
+      // Handle the error as needed.
+    }
   }
+
+  /// List of site IDs.
   List<String>? siteId;
+
+  /// List of fingerprints.
   List<String>? fingerprint;
+
+  /// List of serial numbers, all treated as strings for consistency.
   List<String>? serialNumber;
+
+  /// Order of columns, if relevant for processing or display.
   List<String>? colsOrder;
 
+  /// Converts the [Griddata] instance to JSON.
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['site_id'] = siteId;

@@ -10,7 +10,9 @@ import 'package:lottie/lottie.dart';
 
 import 'LKF_generator.dart';
 import 'main.dart';
+
 List<UploadedFile> uploadedFilesGlobal = <UploadedFile>[];
+
 class WindowsApp extends HookConsumerWidget {
   const WindowsApp({super.key});
 
@@ -34,18 +36,13 @@ class WindowsApp extends HookConsumerWidget {
         List<LrfDto> lrfDtoList = await convertPlatformFileToFile(result.files);
         List<UploadedFile> uploadFiles = await processFiles(lrfDtoList);
 
-
-          uploadedFiles.value = uploadFiles.map((lrf) {
-
-          generateFullLicenseXml(lrf.fileName, lrf.sequenceNumber.text, lrf.fingerPrint.text);
+        uploadedFiles.value = uploadFiles.map((lrf) {
           return UploadedFile(
             fileName: lrf.fileName,
-            siteCode:
-            TextEditingController(text: '${lrf.siteCode.text}'),
+            siteCode: TextEditingController(text: lrf.siteCode.text),
             sequenceNumber:
-            TextEditingController(text: '${lrf.sequenceNumber.text}'),
-            fingerPrint:
-            TextEditingController(text: '${lrf.fingerPrint.text}'),
+                TextEditingController(text: lrf.sequenceNumber.text),
+            fingerPrint: TextEditingController(text: lrf.fingerPrint.text),
           );
         }).toList();
         uploadedFilesGlobal.addAll(uploadedFiles.value);
@@ -65,22 +62,20 @@ class WindowsApp extends HookConsumerWidget {
       return showDialog<void>(
         barrierDismissible: false,
         context: context,
-        builder: (_) =>
-            UploadDialog(
-              animationController: animationController,
-              isUploading: isUploading,
-              onUploadPressed: ()  {
-                handleFileUpload(context);
-                // pemToRSAPrivateKey(privateKeyToPEMGen());
-                // generateFullLicenseXml();
-
-              },
-            ),
+        builder: (_) => UploadDialog(
+          animationController: animationController,
+          isUploading: isUploading,
+          onUploadPressed: () {
+            handleFileUpload(context);
+            // pemToRSAPrivateKey(privateKeyToPEMGen());
+            // generateFullLicenseXml();
+          },
+        ),
       );
     }
 
     useEffect(
-          () {
+      () {
         if (showInitialDialog.value) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             showUploadDialog(context);
@@ -201,29 +196,40 @@ class WindowsApp extends HookConsumerWidget {
   Widget _buildSubmitButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        showDialog<void>(
-          context: context,
-          builder: (_) =>
-              AlertDialog(
-                title: const Text('Hashed'),
-                content: const Text('0X121212121212121212'),
-                actions: [
-                  TextButton(
-                    onPressed: () {
+        Future.delayed(Duration.zero, () async {
+          String? selectedDirectory =
+              await FilePicker.platform.getDirectoryPath();
 
-                      Future.delayed(Duration.zero, () async {
-                        uploadedFilesGlobal.map((uploadedFile){
-                          generateFullLicenseXml(uploadedFile.fileName, uploadedFile.sequenceNumber.text, uploadedFile.fingerPrint.text,);
-
-                        });
-                      });
-                    },
-
-                    child: const Text('OK'),
-                  ),
-                ],
-              ),
-        );
+          print(selectedDirectory);
+          if (selectedDirectory != null && selectedDirectory.isNotEmpty) {
+            for (var uploadedFile in uploadedFilesGlobal) {
+              print(uploadedFile.fileName);
+              await Future.delayed(const Duration(milliseconds: 1));
+              generateFullLicenseXml(
+                basePath: selectedDirectory,
+                fileName: uploadedFile.fileName,
+                sequenceNumber: uploadedFile.sequenceNumber.text,
+                fingerPrint: uploadedFile.fingerPrint.text,
+              );
+            }
+          }
+          showDialog<void>(
+            context: context,
+            builder: (_) => AlertDialog(
+              title: const Text('Upload'),
+              content: const Text('Files Are Uploaded'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    uploadedFilesGlobal.clear();
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
+        });
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.yellow,
@@ -241,9 +247,11 @@ class WindowsApp extends HookConsumerWidget {
   }
 
   // Theme switcher
-  Widget _buildThemeSwitcher(BuildContext context,
-      WidgetRef ref,
-      ThemeMode themeMode,) {
+  Widget _buildThemeSwitcher(
+    BuildContext context,
+    WidgetRef ref,
+    ThemeMode themeMode,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18),
       child: IconButton(
@@ -251,10 +259,8 @@ class WindowsApp extends HookConsumerWidget {
           themeMode == ThemeMode.light ? Icons.dark_mode : Icons.light_mode,
         ),
         onPressed: () {
-          ref
-              .read(themeModeProvider.notifier)
-              .state =
-          themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+          ref.read(themeModeProvider.notifier).state =
+              themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
         },
         tooltip: themeMode == ThemeMode.light
             ? 'Switch to Dark Mode'
@@ -280,9 +286,7 @@ class WindowsApp extends HookConsumerWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: SizedBox(
-          width: MediaQuery
-              .sizeOf(context)
-              .width / 6,
+          width: MediaQuery.sizeOf(context).width / 6,
           height: 200,
           child: Image.asset(
             'assets/images/irancell_logo.jpg',
@@ -293,8 +297,6 @@ class WindowsApp extends HookConsumerWidget {
     );
   }
 }
-
-
 
 class UploadDialog extends StatelessWidget {
   const UploadDialog({

@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:erricson_dongle_tool/lrf_dto.dart';
+import 'package:erricson_dongle_tool/utils.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-
 
 class UploadedFile {
   final String fileName;
@@ -43,7 +43,7 @@ Future<List<UploadedFile>> processFiles(List<LrfDto> lrfDtoList) async {
 
         uploadedFiles.add(
           UploadedFile(
-            fileName: lrfDto.name ?? "",
+            fileName: "${serialNumberStr}_${getCurrentDateTimeLKF()}" ?? "",
             siteCode: TextEditingController(text: siteIds[i]),
             sequenceNumber: TextEditingController(text: serialNumberStr),
             fingerPrint: TextEditingController(text: fingerprints[i]),
@@ -67,10 +67,10 @@ Future<List<LrfDto>> convertPlatformFileToFile(List<PlatformFile> files) async {
       print(content);
       Map<String, dynamic> jsonData = jsonDecode(content);
       print("jsonData$jsonData");
-      LrfDto fileContentModel = LrfDto.fromJson(file.name,jsonData);
+      LrfDto fileContentModel = LrfDto.fromJson(file.name, jsonData);
       print("fileContentModel$fileContentModel");
-      return fileContentModel;  // Return the content of each file
+      return fileContentModel; // Return the content of each file
     }).toList(),
   );
-  return result;  // Return the list of LRFDto
+  return result; // Return the list of LRFDto
 }
