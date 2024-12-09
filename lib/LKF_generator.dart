@@ -4,11 +4,19 @@ import 'package:erricson_dongle_tool/utils.dart';
 import 'package:process_run/process_run.dart';
 import 'package:xml/xml.dart';
 import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
 
 String generateLicenseBodyXml(String sequenceNumber, String fingerPrint) {
+
   // Create the XML structure
   final builder = XmlBuilder();
+  // <body formatVersion="2.0" signatureType="3">
+  // <sequenceNumber>1058</sequenceNumber>
+  // <SWLT>
+  // <generalInfo>2024-12-09T00:24:09 Ericsson AB</generalInfo>
+  // <fingerprint>Enable Monitoring 2021-08-03 1</fingerprint>
+  // </SWLT>
+  // </body>
+
 
   builder.element('body', nest: () {
     builder.attribute('formatVersion', '2.0');
@@ -59,74 +67,61 @@ Future<String> createDirectory(String newDirectoryPath) async {
   return newDirectoryPath;
 }
 
-Future<String> generateFullLicenseXml(
-    {required String basePath,
-      required String fileName,
-      required String sequenceNumber,
-      required String fingerPrint}) async {
+Future<String> generateFullLicenseXml({
+  required String basePath,
+  required String fileName,
+  required String sequenceNumber,
+  required String fingerPrint,
+}) async {
   String bodyXml = generateLicenseBodyXml(sequenceNumber, fingerPrint);
 
-  final directoryPath = p.join(basePath, fileName);  // Use path_provider for proper path construction
-  await createDirectory(directoryPath);  // Make sure directory is created
+  final directoryPath = p.join(basePath, fileName);
+  await createDirectory(directoryPath);
 
-  final filePath = p.join(directoryPath, '$fileName.txt'); // Combine path components correctly
+  final filePath = p.join(directoryPath, '$fileName.txt');
   File file = File(filePath);
-  await file.writeAsString(bodyXml);  // Await to ensure the file is written before proceeding
+  await file.writeAsString(bodyXml);
 
-  String signedXML =
-  await signXmlFile("assets/files/receiver_private_key.pem", file.path);
+  String signedXML = await signXmlFile("assets/files/receiver_private_key.pem", file.path);
 
-  file.deleteSync(recursive: true);  // Deleting the file after signing
+  file.deleteSync(recursive: true);
 
-  // Parse the body XML to get its root elements
+  // Parse the body XML to get its root element
   final bodyElement = XmlDocument.parse(bodyXml).rootElement;
 
-  // Create the final XML document
+  // Build the final document
   final builder = XmlBuilder();
-
   builder.processing('xml', 'version="1.0" encoding="UTF-8"');
+
   builder.element('licFile', nest: () {
+    // Add namespace attributes if needed
     builder.attribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
 
-    // Manually add the body XML elements to the final XML
-    builder.element('body', nest: () {
-      builder.attribute('formatVersion', '2.0');
-      builder.attribute('signatureType', '3');
-      // Add sequenceNumber and other body parts
-      for (var child in bodyElement.children) {
-        if (child is XmlElement) {
-          builder.element(child.name.toString(), nest: () {
-            for (var node in child.children) {
-              if (node is XmlText) {
-                builder.text(node.value);
-              } else if (node is XmlElement) {
-                builder.element(node.name.toString(), nest: node.text);
-              }
-            }
-          });
-        }
-      }
-    });
+    // Copy the entire body element (including attributes) to the new XML
+    _copyXmlElement(builder, bodyElement);
 
+    // Add PKIsignature element
     builder.element('PKIsignature', nest: () {
       builder.attribute('issuer',
           'CN="ProdCA for signing license files, CAX 1060084/28", OU=License Center, O=Ericsson AB, L=LI, C=SE');
       builder.attribute('serialnumber', '1');
-      builder.text(signedXML); // Add the signed XML string as PKI signature
+      builder.text(signedXML);
     });
 
+    // Add certificatechain element
     builder.element('certificatechain', nest: () {
       builder.element('prodcert', nest: prodcert);
       builder.element('cacert', nest: cacert);
     });
   });
 
+  // Write the final XML file
   final fileLKFPath = p.join(directoryPath, '$fileName.txt');
   File fileLKF = File(fileLKFPath);
-  await fileLKF.writeAsString(
-      builder.buildDocument().toXmlString(pretty: true, indent: '  '));
-  // Return the generated full XML string
-  return builder.buildDocument().toXmlString(pretty: true, indent: '  ');
+  final finalXml = builder.buildDocument().toXmlString(pretty: true, indent: '  ');
+  await fileLKF.writeAsString(finalXml);
+
+  return finalXml;
 }
 
 Future<String> signXmlFile(String privateKeyPath, String xmlFilePath) async {
@@ -166,4 +161,26 @@ Future<String> signXmlFile(String privateKeyPath, String xmlFilePath) async {
     print('Exception: $e');
     return 'Exception occurred while signing XML';
   }
+}
+// A helper function to recursively copy an XmlElement into the XmlBuilder
+void _copyXmlElement(XmlBuilder builder, XmlElement element) {
+  builder.element(element.name.qualified,
+      attributes: {
+        for (var attr in element.attributes) attr.name.qualified: attr.value
+      },
+      nest: () {
+        for (var child in element.children) {
+          if (child is XmlText) {
+            builder.text(child.value);
+          } else if (child is XmlElement) {
+            _copyXmlElement(builder, child);
+          } else if (child is XmlComment) {
+            builder.comment(child.text);
+          } else if (child is XmlCDATA) {
+            // If your XML might have CDATA sections, handle them here
+            builder.cdata(child.text);
+          }
+        }
+      }
+  );
 }

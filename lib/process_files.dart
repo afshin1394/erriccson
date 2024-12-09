@@ -5,19 +5,9 @@ import 'package:erricson_dongle_tool/utils.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-class UploadedFile {
-  final String fileName;
-  final TextEditingController siteCode;
-  final TextEditingController sequenceNumber;
-  final TextEditingController fingerPrint;
+import 'UpdateFilesNotifier.dart';
 
-  UploadedFile({
-    required this.fileName,
-    required this.siteCode,
-    required this.sequenceNumber,
-    required this.fingerPrint,
-  });
-}
+
 
 Future<List<UploadedFile>> processFiles(List<LrfDto> lrfDtoList) async {
   List<UploadedFile> uploadedFiles = [];
