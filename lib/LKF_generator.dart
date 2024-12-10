@@ -26,12 +26,12 @@ String generateLicenseBodyXml(String sequenceNumber, String fingerPrint) {
 
     builder.element('SWLT', nest: () {
       builder.attribute('customerId', '949126');
-      builder.attribute('productType', 'MINI-LINK');
-      builder.attribute('swltId', '77334501110e2037cf072b17');
+      builder.attribute('productType', 'MTNI-LINK');
+      builder.attribute('swltId', fingerPrint);
 
       builder.element('generalInfo', nest: () {
-        builder.element('generated', nest: getCurrentDateTime());
-        builder.element('issuer', nest: 'Ericsson AB');
+        builder.element('generated', nest: DateUtil.getCurrentDateTime());
+        builder.element('issuer', nest: 'ILAB');
       });
 
       builder.element('fingerprint', nest: () {
@@ -41,7 +41,7 @@ String generateLicenseBodyXml(String sequenceNumber, String fingerPrint) {
         builder.element('capacityKey', nest: () {
           builder.attribute('id', 'FAL1241127');
           builder.element('description', nest: 'Enable Monitoring');
-          builder.element('start', nest: '2021-08-03');
+          builder.element('start', nest: DateUtil.getCurrentDateTime());
           builder.element('noStop');
           builder.element('capacity', nest: '1');
           builder.element('noHardLimit');
@@ -116,10 +116,13 @@ Future<String> generateFullLicenseXml({
   });
 
   // Write the final XML file
-  final fileLKFPath = p.join(directoryPath, '$fileName.txt');
+  final fileLKFPath = p.join(directoryPath, '$fileName.xml');
+  final fileInfoPath = p.join(directoryPath, '$fileName.pdf');
   File fileLKF = File(fileLKFPath);
+  File fileInfo = File(fileInfoPath);
   final finalXml = builder.buildDocument().toXmlString(pretty: true, indent: '  ');
   await fileLKF.writeAsString(finalXml);
+  await fileInfo.writeAsString("info should be here for $fileName");
 
   return finalXml;
 }

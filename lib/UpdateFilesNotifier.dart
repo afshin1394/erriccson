@@ -48,6 +48,9 @@ class UploadedFilesNotifier extends StateNotifier<List<UploadedFile>> {
 
 final showUploadDialogProvider = StateProvider<bool>((ref) => true);
 
+
+
+
 // Define the provider
 final uploadedFilesProvider =
 StateNotifierProvider<UploadedFilesNotifier, List<UploadedFile>>(

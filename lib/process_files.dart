@@ -4,7 +4,6 @@ import 'package:erricson_dongle_tool/lrf_dto.dart';
 import 'package:erricson_dongle_tool/utils.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-
 import 'UpdateFilesNotifier.dart';
 
 
@@ -31,9 +30,10 @@ Future<List<UploadedFile>> processFiles(List<LrfDto> lrfDtoList) async {
         // Convert serialNumber to string if it's not already
         String serialNumberStr = serialNumbers[i].toString();
 
+
         uploadedFiles.add(
           UploadedFile(
-            fileName: "${serialNumberStr}_${getCurrentDateTimeLKF()}" ?? "",
+            fileName: "${fingerprints[i].toString()}_${DateUtil.getCurrentDateTimeLKF()}" ?? "",
             siteCode: TextEditingController(text: siteIds[i]),
             sequenceNumber: TextEditingController(text: serialNumberStr),
             fingerPrint: TextEditingController(text: fingerprints[i]),

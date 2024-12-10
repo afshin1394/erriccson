@@ -4,12 +4,11 @@ import 'dart:ui';
 
 import 'package:erricson_dongle_tool/process_files.dart';
 import 'package:erricson_dongle_tool/upload_widget.dart';
+import 'package:erricson_dongle_tool/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:lottie/lottie.dart';
 
 // Import your providers
 
@@ -40,6 +39,8 @@ class WindowsApp extends HookConsumerWidget {
     final showInitialDialog = ref.watch(showUploadDialogProvider);
 
     Future<void> handleFileUpload(BuildContext context) async {
+      DateUtil.init();
+
       try {
         final result = await FilePicker.platform.pickFiles(allowMultiple: true);
         if (result != null) {
