@@ -2,16 +2,32 @@ import 'dart:ui';
 import 'package:erricson_dongle_tool/lrf_dto.dart';
 import 'package:erricson_dongle_tool/process_files.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
-
-import 'LKF_generator.dart';
+import 'package:erricson_dongle_tool/lkf_generator.dart';
 import 'main.dart';
 
-List<UploadedFile> uploadedFilesGlobal = <UploadedFile>[];
+// Define a provider for uploaded files
+final uploadedFilesProvider =
+    StateNotifierProvider<UploadedFilesNotifier, List<UploadedFile>>(
+  (ref) => UploadedFilesNotifier(),
+);
+
+class UploadedFilesNotifier extends StateNotifier<List<UploadedFile>> {
+  UploadedFilesNotifier() : super([]);
+
+  void addFiles(List<UploadedFile> files) {
+    state = [...state, ...files];
+  }
+
+  void clearFiles() {
+    state = [];
+  }
+}
 
 class WindowsApp extends HookConsumerWidget {
   const WindowsApp({super.key});
@@ -23,37 +39,53 @@ class WindowsApp extends HookConsumerWidget {
     final isUploading = useState(false);
     final animationController = useAnimationController();
 
-    final uploadedFiles = useState<List<UploadedFile>>([]);
+    final uploadedFiles = ref.watch(uploadedFilesProvider);
 
     Future<void> handleFileUpload(BuildContext context) async {
-      final result = await FilePicker.platform.pickFiles(allowMultiple: true);
-      if (result != null) {
-        isUploading.value = true;
-        animationController
-          ..reset()
-          ..forward();
+      try {
+        final result = await FilePicker.platform.pickFiles(allowMultiple: true);
+        if (result != null) {
+          isUploading.value = true;
+          animationController
+            ..reset()
+            ..forward();
 
-        List<LrfDto> lrfDtoList = await convertPlatformFileToFile(result.files);
-        List<UploadedFile> uploadFiles = await processFiles(lrfDtoList);
+          // Offload file conversion and processing to separate isolates
+          List<LrfDto> lrfDtoList =
+              await compute(convertPlatformFileToFile, result.files);
+          List<UploadedFile> uploadFiles =
+              await compute(processFiles, lrfDtoList);
 
-        uploadedFiles.value = uploadFiles.map((lrf) {
-          return UploadedFile(
-            fileName: lrf.fileName,
-            siteCode: TextEditingController(text: lrf.siteCode.text),
-            sequenceNumber:
-                TextEditingController(text: lrf.sequenceNumber.text),
-            fingerPrint: TextEditingController(text: lrf.fingerPrint.text),
-          );
-        }).toList();
-        uploadedFilesGlobal.addAll(uploadedFiles.value);
+          // Update state without using TextEditingController
+          ref.read(uploadedFilesProvider.notifier).addFiles(uploadFiles);
 
+          isUploading.value = false;
+          animationController.stop();
+
+          if (context.mounted) {
+            Navigator.of(context).pop();
+          }
+          showInitialDialog.value = false;
+        }
+      } catch (e) {
         isUploading.value = false;
         animationController.stop();
-
+        // Handle errors gracefully
         if (context.mounted) {
-          Navigator.of(context).pop();
+          showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+              title: const Text('Error'),
+              content: Text('An error occurred: $e'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
         }
-        showInitialDialog.value = false;
       }
     }
 
@@ -67,13 +99,12 @@ class WindowsApp extends HookConsumerWidget {
           isUploading: isUploading,
           onUploadPressed: () {
             handleFileUpload(context);
-            // pemToRSAPrivateKey(privateKeyToPEMGen());
-            // generateFullLicenseXml();
           },
         ),
       );
     }
 
+    // Show the initial upload dialog on first build
     useEffect(
       () {
         if (showInitialDialog.value) {
@@ -85,6 +116,79 @@ class WindowsApp extends HookConsumerWidget {
       },
       [showInitialDialog.value],
     );
+
+    // Handle Submit with Parallel Processing
+    Future<void> handleSubmit(BuildContext context) async {
+      try {
+        String? selectedDirectory =
+            await FilePicker.platform.getDirectoryPath();
+
+        if (selectedDirectory != null && selectedDirectory.isNotEmpty) {
+          // Show a loading indicator
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) => Center(
+              child: Lottie.asset(
+                'assets/lotties/loading_lottie.json',
+                width: 100,
+                height: 100,
+
+              ),
+            ),
+          );
+
+          // Process all files in parallel
+          await Future.wait(uploadedFiles.map((uploadedFile) {
+            return generateFullLicenseXml(
+              basePath: selectedDirectory,
+              fileName: uploadedFile.fileName,
+              sequenceNumber: uploadedFile.sequenceNumber.text,
+              fingerPrint: uploadedFile.fingerPrint.text,
+            );
+          }));
+
+          // Dismiss the loading indicator
+          if (context.mounted) {
+            Navigator.of(context).pop();
+          }
+
+          // Show success dialog
+          showDialog<void>(
+            context: context,
+            builder: (_) => AlertDialog(
+              title: const Text('Success'),
+              content: const Text(
+                  'All files have been processed and saved successfully.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    ref.read(uploadedFilesProvider.notifier).clearFiles();
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
+        }
+      } catch (e) {
+        // Handle errors gracefully
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: const Text('Error'),
+            content: Text('An error occurred during submission: $e'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -107,14 +211,14 @@ class WindowsApp extends HookConsumerWidget {
             _buildLogoContainer(context, themeMode),
             const Gap(18),
             // Generate a list of cards for each uploaded file
-            _buildFileCards(uploadedFiles.value),
+            _buildFileCards(uploadedFiles),
             const Gap(18),
           ],
         ),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16),
-        child: _buildSubmitButton(context),
+        child: _buildSubmitButton(context, handleSubmit),
       ),
     );
   }
@@ -159,8 +263,8 @@ class WindowsApp extends HookConsumerWidget {
             const Gap(12),
             _buildInputField(
               controller: file.fingerPrint,
-              label: 'fingerPrint',
-              hintText: 'Enter fingerPrint',
+              label: 'Fingerprint',
+              hintText: 'Enter Fingerprint',
               icon: Icons.key,
             ),
             const Gap(12),
@@ -193,44 +297,10 @@ class WindowsApp extends HookConsumerWidget {
   }
 
   // Submit Button
-  Widget _buildSubmitButton(BuildContext context) {
+  Widget _buildSubmitButton(
+      BuildContext context, Future<void> Function(BuildContext) onSubmit) {
     return ElevatedButton(
-      onPressed: () {
-        Future.delayed(Duration.zero, () async {
-          String? selectedDirectory =
-              await FilePicker.platform.getDirectoryPath();
-
-          print(selectedDirectory);
-          if (selectedDirectory != null && selectedDirectory.isNotEmpty) {
-            for (var uploadedFile in uploadedFilesGlobal) {
-              print(uploadedFile.fileName);
-              await Future.delayed(const Duration(milliseconds: 1));
-              generateFullLicenseXml(
-                basePath: selectedDirectory,
-                fileName: uploadedFile.fileName,
-                sequenceNumber: uploadedFile.sequenceNumber.text,
-                fingerPrint: uploadedFile.fingerPrint.text,
-              );
-            }
-          }
-          showDialog<void>(
-            context: context,
-            builder: (_) => AlertDialog(
-              title: const Text('Upload'),
-              content: const Text('Files Are Uploaded'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    uploadedFilesGlobal.clear();
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            ),
-          );
-        });
-      },
+      onPressed: () => onSubmit(context),
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.yellow,
         foregroundColor: Colors.black,
@@ -286,7 +356,7 @@ class WindowsApp extends HookConsumerWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: SizedBox(
-          width: MediaQuery.sizeOf(context).width / 6,
+          width: MediaQuery.of(context).size.width / 6,
           height: 200,
           child: Image.asset(
             'assets/images/irancell_logo.jpg',
@@ -335,8 +405,8 @@ class UploadDialog extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   child: Text(
                     uploading
-                        ? 'Uploading file...'
-                        : 'Please upload a file to proceed.',
+                        ? 'Uploading files...'
+                        : 'Please upload files to proceed.',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 16,
@@ -345,7 +415,7 @@ class UploadDialog extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton.icon(
-                  onPressed: onUploadPressed,
+                  onPressed: uploading ? null : onUploadPressed,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.yellow,
                     foregroundColor: Colors.black,
@@ -355,13 +425,19 @@ class UploadDialog extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  icon: Lottie.asset(
-                    'assets/lotties/upload_icon_lottie.json',
-                    width: 20,
-                    height: 20,
-                  ),
+                  icon: uploading
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : Lottie.asset(
+                          'assets/lotties/upload_icon_lottie.json',
+                          width: 20,
+                          height: 20,
+                        ),
                   label: Text(
-                    uploading ? 'Uploading...' : 'Upload File',
+                    uploading ? 'Uploading...' : 'Upload Files',
                   ),
                 ),
                 const Gap(30),
