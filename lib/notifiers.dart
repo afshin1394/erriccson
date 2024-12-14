@@ -48,7 +48,8 @@ class UploadedFilesNotifier extends StateNotifier<List<UploadedFile>> {
 
 final showUploadDialogProvider = StateProvider<bool>((ref) => true);
 
-
+final uploadClickable = StateProvider<bool>((ref)=> true);
+final generateLKFClickable = StateProvider<bool>((ref)=> true);
 
 
 // Define the provider
