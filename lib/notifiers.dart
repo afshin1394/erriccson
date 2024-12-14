@@ -1,5 +1,6 @@
 // lib/providers/uploaded_files_provider.dart
 
+import 'package:erricson_dongle_tool/lrf_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,14 +10,21 @@ class UploadedFile {
   final TextEditingController siteCode;
   final TextEditingController sequenceNumber;
   final TextEditingController fingerPrint;
+  final String radioOne; // "radio_one" field
+  final Properties properties; // For "properties"
+  final ApprovalData approvalData; // For "approval_data"
 
   UploadedFile({
     required this.fileName,
     required this.siteCode,
     required this.sequenceNumber,
     required this.fingerPrint,
+    required this.radioOne,
+    required this.properties,
+    required this.approvalData,
   });
 }
+
 
 // Define the StateNotifier
 class UploadedFilesNotifier extends StateNotifier<List<UploadedFile>> {
@@ -41,6 +49,7 @@ class UploadedFilesNotifier extends StateNotifier<List<UploadedFile>> {
       file.siteCode.dispose();
       file.sequenceNumber.dispose();
       file.fingerPrint.dispose();
+
     }
     state = [];
   }
@@ -48,8 +57,8 @@ class UploadedFilesNotifier extends StateNotifier<List<UploadedFile>> {
 
 final showUploadDialogProvider = StateProvider<bool>((ref) => true);
 
-final uploadClickable = StateProvider<bool>((ref)=> true);
-final generateLKFClickable = StateProvider<bool>((ref)=> true);
+final uploadClickableProvider = StateProvider<bool>((ref)=> true);
+final generateLKFClickableProvider = StateProvider<bool>((ref)=> true);
 
 
 // Define the provider

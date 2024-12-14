@@ -1,21 +1,19 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:erricson_dongle_tool/consts.dart';
+import 'package:erricson_dongle_tool/notifiers.dart';
 import 'package:erricson_dongle_tool/utils.dart';
 import 'package:process_run/process_run.dart';
 import 'package:xml/xml.dart';
 import 'package:path/path.dart' as p;
 
+import 'info_generator.dart';
+
 String generateLicenseBodyXml(String sequenceNumber, String fingerPrint) {
 
   // Create the XML structure
   final builder = XmlBuilder();
-  // <body formatVersion="2.0" signatureType="3">
-  // <sequenceNumber>1058</sequenceNumber>
-  // <SWLT>
-  // <generalInfo>2024-12-09T00:24:09 Ericsson AB</generalInfo>
-  // <fingerprint>Enable Monitoring 2021-08-03 1</fingerprint>
-  // </SWLT>
-  // </body>
+
 
 
   builder.element('body', nest: () {
@@ -72,6 +70,7 @@ Future<String> generateFullLicenseXml({
   required String fileName,
   required String sequenceNumber,
   required String fingerPrint,
+  required UploadedFile uploadedFile,
 }) async {
   String bodyXml = generateLicenseBodyXml(sequenceNumber, fingerPrint);
 
@@ -82,7 +81,7 @@ Future<String> generateFullLicenseXml({
   File file = File(filePath);
   await file.writeAsString(bodyXml);
 
-  String signedXML = await signXmlFile("assets/files/receiver_private_key.pem", file.path);
+  String signedXML = await signXmlFile("assets/files/application_private_key.pem", file.path);
 
   file.deleteSync(recursive: true);
 
@@ -122,7 +121,7 @@ Future<String> generateFullLicenseXml({
   File fileInfo = File(fileInfoPath);
   final finalXml = builder.buildDocument().toXmlString(pretty: true, indent: '  ');
   await fileLKF.writeAsString(finalXml);
-  await fileInfo.writeAsString("info should be here for $fileName");
+  await fileInfo.writeAsString(await generateInfoFile(uploadedFile,fileInfoPath));
 
   return finalXml;
 }
