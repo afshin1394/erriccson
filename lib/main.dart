@@ -1,4 +1,6 @@
 
+import 'package:erricson_dongle_tool/consts.dart';
+import 'package:erricson_dongle_tool/secure_storage.dart';
 import 'package:erricson_dongle_tool/test_widget.dart';
 import 'package:erricson_dongle_tool/theme.dart';
 import 'package:flutter/material.dart';
@@ -39,20 +41,7 @@ class _MyAppState extends ConsumerState<MyApp> {
 
     // Call async function using Future.delayed
     Future.delayed(Duration.zero, () async {
-      // decryptData();
-
-      // String? publicKey =
-      //     await readTextFile(r'C:\Users\afshin.sa\public_key.pem');
-      // String? privateKey =
-      //     await readTextFile(r'C:\Users\afshin.sa\private_key.pem');
-      //
-      // // Save keys to storage or perform other actions
-      // writeToStorage("public_key", publicKey ?? "");
-      // writeToStorage("private_key", privateKey ?? "");
-      //
-      // // Print the stored public key
-      // print(await readFromStorage("private_key"));
-      // print(await readFromStorage("public_key"));
+      writeToStorage(private_key_password, "Hasan.gh@mtnirancell.ir");
     });
   }
 }

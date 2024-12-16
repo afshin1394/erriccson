@@ -43,3 +43,5 @@ aM+6ba+OEp6Z2mdFGfpwIicfLfXMt/sAI/kKmfNHrHd+jRfZJZ1tbedpbE19VXvSiolYkatxb51k
 g+JFB+LEWc7y69ewDwxKdAPACbPusafn8iGtIDxPUA70aWkMGjDyEmT5xyGJuq7faPak2pDdj8DB
 aWPhias4paWAyP2nOA==
 -----END CERTIFICATE-----''';
+
+const private_key_password = "private_key_password";

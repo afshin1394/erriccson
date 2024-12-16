@@ -1,5 +1,4 @@
-import 'dart:io';
-import 'package:path_provider/path_provider.dart';
+
 import 'notifiers.dart';
 
 Future<String> generateInfoFile(UploadedFile uploadedFile,String path) async {
@@ -31,7 +30,7 @@ Approvers Information
         fileContent += "Engineer Approvers:\n";
         for (var engineer in uploadedFile.approvalData.engineerApproval) {
           fileContent +=
-          "- Name: ${engineer.engineerApprover.isNotEmpty ? engineer.engineerApprover : "N/A"}\n";
+          "- Name: ${engineer.engineerApprover!.isNotEmpty ? engineer.engineerApprover : "N/A"}\n";
           fileContent +=
           "  Date/Time: ${engineer.startDate.isNotEmpty ? engineer.startDate : "N/A"}\n";
         }
@@ -46,7 +45,7 @@ Approvers Information
         fileContent += "Manager Approvers:\n";
         for (var manager in uploadedFile.approvalData.managerApproval) {
           fileContent +=
-          "- Name: ${manager.managerApprover.isNotEmpty ? manager.managerApprover : "N/A"}\n";
+          "- Name: ${manager.managerApprover!.isNotEmpty ? manager.managerApprover : "N/A"}\n";
           fileContent +=
           "  Date/Time: ${manager.startDate.isNotEmpty ? manager.startDate : "N/A"}\n";
         }

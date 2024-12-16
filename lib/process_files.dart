@@ -17,37 +17,69 @@ Future<List<UploadedFile>> processFiles(List<LrfDto> lrfDtoList) async {
   List<UploadedFile> uploadedFiles = [];
 
   for (var lrfDto in lrfDtoList) {
-    var griddata = lrfDto.data.griddata;
+    var data = lrfDto.data;
+    var griddata = data.griddata;
 
-    // Ensure griddata is not null
-    if (griddata.siteId.isNotEmpty &&
+    // Check if griddata exists and contains non-empty lists
+    if (griddata != null &&
+        griddata.siteId.isNotEmpty &&
         griddata.fingerprint.isNotEmpty &&
         griddata.sequenceNumber.isNotEmpty) {
-      var siteIds = griddata.siteId;
-      var fingerprints = griddata.fingerprint;
-      var sequenceNumbers = griddata.sequenceNumber;
 
       // Determine the minimum length among the lists to prevent out-of-bounds errors
       int minLength = [
-        siteIds.length,
-        fingerprints.length,
-        sequenceNumbers.length,
+        griddata.siteId.length,
+        griddata.fingerprint.length,
+        griddata.sequenceNumber.length,
       ].reduce((a, b) => a < b ? a : b);
 
       for (int i = 0; i < minLength; i++) {
-        String fingerPrintStr = fingerprints[i].toString();
-        String sequenceNumberStr = sequenceNumbers[i].toString();
+        String fingerPrintStr = griddata.fingerprint[i];
+        String sequenceNumberStr = griddata.sequenceNumber[i].toString();
+        String siteIdStr = griddata.siteId[i];
+
         uploadedFiles.add(
           UploadedFile(
             fileName: "${fingerPrintStr}_${DateUtil.getCurrentDateTimeLKF()}",
-            siteCode: TextEditingController(text: siteIds[i]),
+            siteCode: TextEditingController(text: siteIdStr),
             sequenceNumber: TextEditingController(text: sequenceNumberStr),
-            fingerPrint: TextEditingController(text: fingerprints[i]),
-            radioOne: lrfDto.data.radioOne,
-            properties: lrfDto.data.properties,
-            approvalData: lrfDto.data.approvalData
+            fingerPrint: TextEditingController(text: fingerPrintStr),
+            radioOne: data.radioOne,
+            properties: data.properties,
+            approvalData: data.approvalData,
           ),
         );
+      }
+    } else {
+      // Handle the case where griddata is null or empty
+      // Ensure that the required single fields are present
+      String? siteIdStr = data.siteId;
+      String? fingerprintStr = data.fingerprint;
+      String? sequenceNumberStr = data.sequenceNumber;
+
+      // Check if all required single fields are non-null and non-empty
+      if (siteIdStr != null &&
+          siteIdStr.isNotEmpty &&
+          fingerprintStr != null &&
+          fingerprintStr.isNotEmpty &&
+          sequenceNumberStr != null &&
+          sequenceNumberStr.trim().isNotEmpty) {
+
+        uploadedFiles.add(
+          UploadedFile(
+            fileName: "${fingerprintStr}_${DateUtil.getCurrentDateTimeLKF()}",
+            siteCode: TextEditingController(text: siteIdStr),
+            sequenceNumber: TextEditingController(text: sequenceNumberStr.trim()),
+            fingerPrint: TextEditingController(text: fingerprintStr),
+            radioOne: data.radioOne,
+            properties: data.properties,
+            approvalData: data.approvalData,
+          ),
+        );
+      } else {
+        // Optionally, handle cases where required fields are missing or empty
+        // For example, log a warning or throw an exception
+        print('Warning: Missing required fields in Data object for LrfDto with signature: ${lrfDto.signature}');
       }
     }
   }
@@ -82,9 +114,10 @@ Future<bool> executePythonScript(String lrfFilePath) async {
       [tempScriptPath, lrfFilePath],
       workingDirectory: tempDir.path, // Set the working directory to the temporary directory
     );
+    print("stdout ${result.stdout.toString()}");
 
     // Return true if the script executed successfully
-    return result.exitCode == 0;
+    return result.stdout.toString().contains("successful");
   } catch (e) {
     print("Eroor $e");
     // Return false if an exception occurs

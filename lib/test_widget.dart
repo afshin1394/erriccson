@@ -3,6 +3,7 @@
 import 'dart:ui';
 
 import 'package:erricson_dongle_tool/process_files.dart';
+import 'package:erricson_dongle_tool/secure_storage.dart';
 import 'package:erricson_dongle_tool/upload_widget.dart';
 import 'package:erricson_dongle_tool/utils.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import 'package:file_picker/file_picker.dart';
 
 
 
+import 'consts.dart';
 import 'lkf_generator.dart';
 import 'notifiers.dart';
 import 'loading_widget.dart';
@@ -98,11 +100,9 @@ class WindowsApp extends HookConsumerWidget {
             ref.read(showUploadDialogProvider.notifier).state = true;
             ref.read(uploadedFilesProvider.notifier).clearFiles();
             ref.read(uploadClickableProvider.notifier).state = true;
-
           }
         }else{
           ref.read(uploadClickableProvider.notifier).state = true;
-
         }
       } catch (e) {
         // Handle errors, e.g., show a Snackbar or Dialog
@@ -277,6 +277,7 @@ class WindowsApp extends HookConsumerWidget {
                const LoadingDialog(message: 'Processing files...'),
              );
              final uploadedFiles = ref.read(uploadedFilesProvider);
+             String decryptedPrivateKey = await decryptPrivateKey("assets/files/application_private_key.enc",await readFromStorage(private_key_password)??"");
 
              List<Future<void>> processingFutures = uploadedFiles.map((
                  uploadedFile) async {
@@ -285,6 +286,7 @@ class WindowsApp extends HookConsumerWidget {
                  await Future.delayed(const Duration(
                      milliseconds: 1)); // Optional: Remove if unnecessary
                  await generateFullLicenseXml(
+                   decryptedPrivateKey : decryptedPrivateKey,
                    basePath: selectedDirectory,
                    fileName: uploadedFile.fileName,
                    sequenceNumber: uploadedFile.sequenceNumber.text,
